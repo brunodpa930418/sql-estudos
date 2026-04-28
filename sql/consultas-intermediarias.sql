@@ -107,3 +107,46 @@ CREATE OR REPLACE VIEW EMP_DEPT AS
 SELECT E.EMP_ID, E.F_NAME, E.L_NAME, D.DEP_NAME
 FROM EMPLOYEES E
 JOIN DEPARTMENTS D ON E.DEP_ID = D.DEPT_ID;
+
+-- ==============================
+-- 🔗 JOINS (Prática)
+-- ==============================
+
+-- INNER JOIN
+-- Cidades com países correspondentes
+SELECT 
+    C.NAME AS CITY,
+    CO.NAME AS COUNTRY
+FROM CITY C
+INNER JOIN COUNTRY CO
+    ON C.COUNTRYCODE = CO.CODE;
+
+
+-- LEFT JOIN
+-- Todas as cidades, mesmo sem país correspondente
+SELECT 
+    C.NAME AS CITY,
+    CO.NAME AS COUNTRY
+FROM CITY C
+LEFT JOIN COUNTRY CO
+    ON C.COUNTRYCODE = CO.CODE;
+
+
+-- RIGHT JOIN
+-- Todos os países, mesmo sem cidades
+SELECT 
+    CO.NAME AS COUNTRY,
+    C.NAME AS CITY
+FROM CITY C
+RIGHT JOIN COUNTRY CO
+    ON C.COUNTRYCODE = CO.CODE;
+
+
+-- LEFT JOIN + IS NULL (ANTI JOIN)
+-- Países que não possuem cidades
+SELECT 
+    CO.NAME AS COUNTRY
+FROM COUNTRY CO
+LEFT JOIN CITY C
+    ON C.COUNTRYCODE = CO.CODE
+WHERE C.NAME IS NULL;
